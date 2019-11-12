@@ -1,0 +1,14 @@
+#! /usr/bin/python3.7
+
+import sys
+import random
+
+args = list(' '.join(sys.argv[1:]))
+
+for i, letter in enumerate(args):
+    if random.choice([True, True, True, False, False]):
+        args[i] = args[i].upper()
+    else:
+        args[i] = args[i].lower()
+
+print(''.join(args))
