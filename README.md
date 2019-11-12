@@ -1,2 +1,2 @@
 # Sneer
-Generates the sarcastic "spongebob text" from the command line 
+Generates the sarcastic "spongebob text" inthe command line 
