@@ -10,7 +10,7 @@ if len(args) == 0:
     del args[-1]
 
 for i, letter in enumerate(args):
-    if random.choice([True, True, True, False, False]):
+    if random.choice([True, False]):
         args[i] = args[i].upper()
     else:
         args[i] = args[i].lower()
