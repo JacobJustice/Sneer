@@ -5,6 +5,10 @@ import random
 
 args = list(' '.join(sys.argv[1:]))
 
+if len(args) == 0:
+    args = list(sys.stdin.read())
+    del args[-1]
+
 for i, letter in enumerate(args):
     if random.choice([True, True, True, False, False]):
         args[i] = args[i].upper()
