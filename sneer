@@ -1,18 +1,56 @@
 #! /usr/bin/python3
 
 import sys
-import random
 
-args = list(' '.join(sys.argv[1:]))
+#
+# sneer_default
+#
+# parameters:
+# word -word in the input string that the character you are considering to
+# 	upper or lower is from
+# index-index of the character you are considering to upper or lower
+# 
+# return:
+# boolean (capitalize this character or not)
+#
+# parameters allow for a wide variety of conditions to make your own sarcastic
+# looking text. sneer_default simply flips a coin
+# 
+# intended to be passed in as an argument to the main function
+#
 
-if len(args) == 0:
-    args = list(sys.stdin.read())
-    del args[-1]
+def sneer_default(word, index):
+    import random
+    return random.choice([True,False])
 
-for i, letter in enumerate(args):
-    if random.choice([True, False]):
-        args[i] = args[i].upper()
+#
+# main
+#
+# parameters:
+# sneer_function -	function that takes in a word and index, and returns true or false
+#
+# uses sneer_function to decide whether or not to capitalize a letter
+#
+def main(sneer_function):
+    args = sys.argv[1:]
+    if len(args) == 0: #if there are no normal arguments
+        args = list(sys.stdin.read()) #check stdin
+        del args[-1]
+    if len(args) == 0: #if there are still no normal arguments
+        print("Pass in arguments!") #error message
+        sys.exit() #exit
     else:
-        args[i] = args[i].lower()
+        processed_args = []
+        for word in args:
+            l_word = list(''.join(word))
+            for i, letter in enumerate(word):
+                if sneer_function(word, i):
+                    l_word[i] = l_word[i].upper()
+                else:
+                    l_word[i] = l_word[i].lower()
+            l_word.append(' ')
+            processed_args += l_word
 
-print(''.join(args))
+        print(''.join(processed_args[0:(len(processed_args)-1)]))
+
+main(sneer_default)
