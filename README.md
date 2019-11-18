@@ -17,7 +17,9 @@ TesTIng oUtPUT
 ❰jacob❙~❱✔≻ cat file
 
 test test test
+
 1 2 3 4
+
 abcdefghijklmnopqrstuvwxyz
 
 ❰jacob❙~❱✔≻ cat file | sneer
