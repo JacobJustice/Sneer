@@ -23,9 +23,27 @@ def sneer_default(word, index):
     import random
     return random.choice([True,False])
 
+
 #
+# char_to_words
 #
+# parameters:
+# char_list -	list of chars
 #
+# return:
+# word_list - list of strings
+#
+# concatenates chars into string, seperated by spaces
+#
+# in: ['a','p','p','l','e',' ','j','u','i','c','e']
+# out: ["apple", "juice"]
+#
+
+def char_to_words(char_list):
+    word_list = ''.join(char_list)
+    word_list =  word_list.split(' ')
+    return word_list
+
 
 #
 # main
@@ -35,14 +53,15 @@ def sneer_default(word, index):
 #
 # uses sneer_function to decide whether or not to capitalize a letter
 #
+
 def main(sneer_function):
     args = sys.argv[1:]
     if len(args) == 0: #if there are no normal arguments
         args = list(sys.stdin.read()) #check stdin
-        print(args)
-        del args[-1]
+        args = char_to_words(args) #convert to proper format
+        if args[-1][-1] == '\n':
+            args[-1] = args[-1][:-1] #remove \n
     if len(args) == 0: #if there are still no normal arguments
-        print("Pass in arguments!") #error message
         sys.exit() #exit
     else:
         processed_args = []
