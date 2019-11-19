@@ -13,9 +13,10 @@ Sneer provides an easy way to make sarcastic comments in your code
 # Functionality
 Sneer works with stdin allowing for piping
 
-`$ cat file | sneer
+```
+$ cat file | sneer
 
-TeST tEST Test`
+TeST tEST Test```
 
 (Originally I made this to leave sarcastic comments using kakoune's built in | command)
 
