@@ -26,10 +26,13 @@ to make you own rules for how to capitalize or lowercase letters.
 By default, it randomly uppers and lowers characters individually. But by
 writing your own function you can build your own rulesets.
 
-A custom function must take in a word and an index of that word as a parameter. The
+A custom function must take in a word and an index of that word as parameters. The
 index tells you which character you want to capitalize and the word allows you to use the context
-of the whole word. For example maybe you want to always capitalize vowels but never capitalize 
-adjacent vowels. You could write:
+of the whole word. If you want the character at `index` to be uppercase 
+return True, for lowercase return False. 
+
+For example maybe you want to always capitalize vowels 
+unless they are adjacent to another vowel you could write:
 
 ```python
 def sneer_vowels(word, index):
