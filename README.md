@@ -29,12 +29,14 @@ index tells you which character you want to capitalize and the word allows you t
 of the whole word. For example maybe you want to always capitalize vowels but never capitalize 
 adjacent vowels. You could write:
 
-`def sneer_vowels(word, index):
+```python
+def sneer_vowels(word, index):
     vowels = ['a','e','i','o','u','A','E','I','O','U',]
     if word[index] is in vowels:
         return true
     else:
-        return false`
+        return false
+```
         
 And then replace the `main(sneer_default)` call with `main(sneer_vowels)`
 
