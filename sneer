@@ -1,9 +1,10 @@
 #! /usr/bin/python3
 
 import sys
+import yaml
 
 #
-# sneer_default
+# sneer_random
 #
 # parameters:
 # word -word in the input string that the character you are considering to
@@ -19,10 +20,44 @@ import sys
 # intended to be passed in as an argument to the main function
 #
 
-def sneer_default(word, index):
+def sneer_random(word, index):
     import random
     return random.choice([True,False])
 
+#
+# sneer_vowels
+#
+# parameters:
+# word -word in the input string that the character you are considering to
+# 	upper or lower is from
+# index-index of the character you are considering to upper or lower
+# 
+# return:
+# boolean (capitalize this character or not)
+#
+# capitalize based on vowels
+#
+
+def sneer_vowels(word, index):
+    match = 'aeiouAEIOU'
+    if word[index] in match:
+        if index-1 >= 0 and word[index-1] not in match:
+            return True
+        elif index+1 < len(word) and word[index+1] not in match:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+def sneer_consonants(word, index):
+    return not sneer_vowels(word, index)
+
+casing_schemes = {
+    'sneer_random': sneer_random,
+    'sneer_vowels': sneer_vowels,
+    'sneer_consonants': sneer_consonants
+}
 
 #
 # char_to_words
@@ -77,4 +112,27 @@ def main(sneer_function):
 
         print(''.join(processed_args[0:(len(processed_args)-1)]))
 
-main(sneer_default)
+
+
+def get_config():
+    with open("config.yaml", 'r') as infile:
+        config = yaml.load(infile)
+        
+        return config
+
+def update_config(dict):
+    config = get_config()
+    
+    for key in dict:
+        config[key] = dict[key]
+
+    with open('config.yaml', 'w') as outfile:
+        yaml.dump(config, outfile)
+
+def use_casing_scheme(scheme):
+    update_config({'casing_scheme': scheme})
+
+
+# init
+config = get_config()
+main(casing_schemes[config['casing_scheme']])
