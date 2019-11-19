@@ -32,10 +32,15 @@ adjacent vowels. You could write:
 ```python
 def sneer_vowels(word, index):
     vowels = ['a','e','i','o','u','A','E','I','O','U',]
-    if word[index] is in vowels:
-        return true
+    if word[index] in vowels:
+        if index-1 >= 0 and word[index-1] not in vowels:
+            return True
+        elif index+1 < len(word) and word[index+1] not in vowels:
+            return True
+        else:
+            return False
     else:
-        return false
+        return False
 ```
         
 And then replace the `main(sneer_default)` call with `main(sneer_vowels)`
