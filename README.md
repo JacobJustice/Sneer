@@ -16,7 +16,8 @@ Sneer works with stdin allowing for piping
 ```
 $ cat file | sneer
 
-TeST tEST Test```
+TeST tEST Test
+```
 
 (Originally I made this to leave sarcastic comments using kakoune's built in | command)
 
@@ -47,34 +48,36 @@ def sneer_vowels(word, index):
 And then replace the `main(sneer_default)` call with `main(sneer_vowels)`
 
 # Examples
-`❰jacob❙~/❱✔≻ sneer testing output`
+```
+❰jacob❙~/❱✔≻ sneer testing output
 
-`testinG oUTpuT`
+testinG oUTpuT
 
-`❰jacob❙~/❱✔≻ sneer testing output`
+❰jacob❙~/❱✔≻ sneer testing output
 
-`TesTInG OUTPUT`
+TesTInG OUTPUT
 
-`❰jacob❙~❱✔≻ cat file`
+❰jacob❙~❱✔≻ cat file
 
-`test test test`
+test test test
 
-`1 2 3 4`
+1 2 3 4
 
-`abcdefghijklmnopqrstuvwxyz`
+abcdefghijklmnopqrstuvwxyz
 
-`❰jacob❙~❱✔≻ cat file | sneer`
+❰jacob❙~❱✔≻ cat file | sneer
 
-`tEST tesT tEST`
+tEST tesT tEST
 
-`1 2 3 4`
+1 2 3 4
 
-`AbcdEFgHijkLMNoPqRStuvwxyz`
+AbcdEFgHijkLMNoPqRStuvwxyz
 
-`❰jacob❙~❱✔≻ cat file | sneer`
+❰jacob❙~❱✔≻ cat file | sneer
 
-`teSt Test Test`
+teSt Test Test
 
-`1 2 3 4`
+1 2 3 4
 
-`abCdefGhIjKlMnopQrsTUVwxyz`
+abCdefGhIjKlMnopQrsTUVwxyz
+```
