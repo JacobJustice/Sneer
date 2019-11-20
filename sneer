@@ -93,7 +93,7 @@ def main(sneer_function):
             args = list(sys.stdin.read()) #check stdin
             input = char_to_words(args) #convert to proper format
             if input[-1][-1] == '\n':
-                input[-1] = args[-1][:-1] #remove \n
+                input[-1] = input[-1][:-1] #remove \n
 
     if len(input) == 0: #if there are still no normal arguments
         sys.exit() #exit
