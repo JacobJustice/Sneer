@@ -10,6 +10,11 @@ Sneer provides an easy way to make sarcastic comments in your code
 
 `git commit $(sneer fixed some documentation)`
 
+# Usage
+`sneer [-f input_file] [-o output_file] [text to sneer]`
+
+If no arguments or text is provided, sneer will use stdin.
+
 # Functionality
 Sneer works with stdin allowing for piping
 

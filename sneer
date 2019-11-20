@@ -1,6 +1,7 @@
 #! /usr/bin/python3
 
 import sys
+import getopt
 
 #
 # sneer_default
@@ -44,7 +45,20 @@ def char_to_words(char_list):
     word_list =  word_list.split(' ')
     return word_list
 
-
+def sneer(sneer_function, words):
+        sneered = []
+        for word in words:
+            l_word = list(''.join(word))
+            for i, letter in enumerate(word):
+                if sneer_function(word, i):
+                    l_word[i] = l_word[i].upper()
+                else:
+                    l_word[i] = l_word[i].lower()
+            l_word.append(' ')
+            sneered += l_word
+		# Delete trailing newline
+        del sneered[-1]
+        return sneered
 #
 # main
 #
@@ -55,26 +69,48 @@ def char_to_words(char_list):
 #
 
 def main(sneer_function):
-    args = sys.argv[1:]
-    if len(args) == 0: #if there are no normal arguments
-        args = list(sys.stdin.read()) #check stdin
-        args = char_to_words(args) #convert to proper format
-        if args[-1][-1] == '\n':
-            args[-1] = args[-1][:-1] #remove \n
-    if len(args) == 0: #if there are still no normal arguments
-        sys.exit() #exit
-    else:
-        processed_args = []
-        for word in args:
-            l_word = list(''.join(word))
-            for i, letter in enumerate(word):
-                if sneer_function(word, i):
-                    l_word[i] = l_word[i].upper()
-                else:
-                    l_word[i] = l_word[i].lower()
-            l_word.append(' ')
-            processed_args += l_word
+    input_from_file = False
+    output_to_file = False
 
-        print(''.join(processed_args[0:(len(processed_args)-1)]))
+    opts, args = getopt.getopt(sys.argv[1:], "f:o:")
+    # Parse arguments
+    for opt, arg in opts:
+        if opt == "-f":
+            input_from_file = True
+            input_path = arg
+        if opt == "-o":
+            output_to_file = True
+            output_path = arg
+
+	# If an input file was specified, read the file into input
+    if input_from_file:
+        with open(input_path) as f:
+            content = f.read()
+            input = list(content)
+            input = char_to_words(input)
+
+    # otherwise get input from stdin
+    else:
+        input = args
+        if len(input) == 0: #if there are no normal arguments
+            args = list(sys.stdin.read()) #check stdin
+            input = char_to_words(args) #convert to proper format
+            if input[-1][-1] == '\n':
+                input[-1] = input[-1][:-1] #remove \n
+
+    if len(input) == 0: #if there are still no normal arguments
+        sys.exit() #exit
+
+    # Run sneer
+    sneered = sneer(sneer_function, input)
+
+    # If an output file was specified, write to it
+    if output_to_file:
+        with open(output_path, 'w+') as f:
+            f.write(''.join(sneered))
+
+    # Otherwise print to stdin
+    else:
+        print(''.join(sneered))
 
 main(sneer_default)
