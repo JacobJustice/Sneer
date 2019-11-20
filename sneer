@@ -73,6 +73,7 @@ def main(sneer_function):
     output_to_file = False
 
     opts, args = getopt.getopt(sys.argv[1:], "f:o:")
+    # Parse arguments
     for opt, arg in opts:
         if opt == "-f":
             input_from_file = True
@@ -81,13 +82,15 @@ def main(sneer_function):
             output_to_file = True
             output_path = arg
 
+	# If an input file was specified, read the file into input
     if input_from_file:
         with open(input_path) as f:
             content = f.read()
             input = list(content)
             input = char_to_words(input)
+
+    # otherwise get input from stdin
     else:
-        # Get input
         input = args
         if len(input) == 0: #if there are no normal arguments
             args = list(sys.stdin.read()) #check stdin
@@ -101,9 +104,12 @@ def main(sneer_function):
     # Run sneer
     sneered = sneer(sneer_function, input)
 
+    # If an output file was specified, write to it
     if output_to_file:
         with open(output_path, 'w+') as f:
             f.write(''.join(sneered))
+
+    # Otherwise print to stdin
     else:
         print(''.join(sneered))
 
